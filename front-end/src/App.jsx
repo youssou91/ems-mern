@@ -1,9 +1,18 @@
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
+import Login from "./pages/Login"
+import Notfound from "./pages/Notfound"
+import AdminDashBoard from "./pages/AdminDashBoard"
 function App() {
 
   return (
-   
-      <div className="text-3xl text-teal-500">Bienvenue chez nous !!!</div>
-   
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Navigate to="/admin-dashboard" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/admin-dashboard" element={<AdminDashBoard />} />
+      <Route path="*" element={<Notfound />} />
+    </Routes>
+    </BrowserRouter>
   )
 }
 
