@@ -1,7 +1,9 @@
+import { useAuth } from "../context/authContext"
 
 const AdminDashBoard = () => {
+  const {user} = useAuth()
   return (
-    <div>AdminDashBoard</div>
+    <div>AdminDashBoard {user && user.name}</div>
   )
 }
 

@@ -2,8 +2,6 @@ import User from '../models/user.js'
 import bcrypt from'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const express = require('express');
-
 const login = async (req, res)=>{
     try {
         const {email, password} = req.body;
@@ -23,9 +21,12 @@ const login = async (req, res)=>{
             process.env.JWT_KEY, 
             {expiresIn: "10d"}
         )
-        res.json({succes: true, token})
+        res.status(200).json({
+            succes:true, token, 
+            user:{_id:user._id, name:user.name, role:user.role},
+        });
     } catch (err) {
-        console.log(err.message)
+        res.status(500).json({error: err.message});
     } 
 }
 export {login}

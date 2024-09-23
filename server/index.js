@@ -1,7 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import userRouter from './routes/auth.js'
+import connectToDatabase from './db/db.js'
 
+// Connexion a la base de donnees MongoDB 
+connectToDatabase
 const app = express()
 app.use(cors())
 app.use(express.json())
