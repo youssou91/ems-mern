@@ -1,13 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import {createContext, useContext, useEffect, useState } from 'react'
 
-const userContext = React.createContext()
+const userContext = createContext()
 
 const authContext = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [error, setError] = useState("");
-    const navigate = useNavigate()
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         const verifyUser = async ()=>{
             try {
@@ -23,13 +21,16 @@ const authContext = ({ children }) => {
                         setUser(response.data.user)
                     }
                 }else{
-                    localStorage.removeItem("token")
-                    navigate('/login')
+                    setUser(null)
+                    // localStorage.removeItem("token")
+                    // navigate('/login')
                 }
             } catch (error) {
                 if (error.response && !error.response.data.error) {
-                   navigate('/login')
+                    setUser(null)
                }
+            }finally{
+                setLoading(false)
             }
         }
         verifyUser()
@@ -42,7 +43,7 @@ const authContext = ({ children }) => {
         localStorage.removeItem("token")
     }
     return (
-        <userContext.Provider value={{ user, login, logout }}>
+        <userContext.Provider value={{ user, login, logout, loading}}>
             {children}
         </userContext.Provider>
     )

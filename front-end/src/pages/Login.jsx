@@ -15,7 +15,7 @@ const Login = () => {
         try {
             const response = await axios.post("http://localhost:5000/api/auth/login", { email, password })
             if(response.data) {
-                alert("Connexion reussie !!!")
+                // alert("Connexion reussie !!!")
                 login(response.data.user)
                 localStorage.setItem("token", response.data.token)
                 if(response.data.user.role === "admin"){
