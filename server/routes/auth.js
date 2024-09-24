@@ -6,6 +6,6 @@ import autthMiddleware from '../middleware/authMiddleware.js'
 const router = exp.Router()
 
 router.post('/login', login)
-router.post('/verify', autthMiddleware, verify)
+router.get('/verify', autthMiddleware, verify)
 
 export default router;

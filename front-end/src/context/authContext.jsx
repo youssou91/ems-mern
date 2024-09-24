@@ -5,7 +5,7 @@ const userContext = createContext()
 
 const authContext = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const verifyUser = async ()=>{
             try {
@@ -16,16 +16,16 @@ const authContext = ({ children }) => {
                             'Authorization': `Bearer ${token}`
                         }
                     })
-                    
+                    console.log(response)
                     if (response.data.success) {
                         setUser(response.data.user)
                     }
                 }else{
                     setUser(null)
-                    // localStorage.removeItem("token")
-                    // navigate('/login')
+                    setLoading(false)
                 }
             } catch (error) {
+                console.error(error)
                 if (error.response && !error.response.data.error) {
                     setUser(null)
                }
