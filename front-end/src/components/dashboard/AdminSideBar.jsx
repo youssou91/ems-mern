@@ -6,8 +6,8 @@ import { FaBuilding, FaCalendarAlt, FaCogs, FaMoneyBillWave, FaTachometerAlt, Fa
 const AdminSideBar = () => {
     return (
         <div className="bg-gray-500 text-white h-screen fixed left-0 top-0 bottom-0 space-y-3 w-64">
-            <div className="bg-teal-500 h-20 flex items-center justify-center rounded">
-                <h3 className="text-2xl text-center font-pacific">Systeme de Gestion des Employes</h3>
+            <div className="bg-teal-600 h-20 flex items-center justify-center">
+                <h3 className="text-2xl text-center font-pacific">S. G. E.</h3>
             </div>
             <div className="px-4">
                 <NavLink to={"/admin-dashboard"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>

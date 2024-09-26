@@ -1,5 +1,7 @@
 // import { useNavigate } from "react-router-dom"
 import AdminSideBar from "../components/dashboard/adminSideBar"
+import AdminSummary from "../components/dashboard/AdminSummary"
+import Navbar from "../components/dashboard/Navbar"
 // import { useAuth } from "../context/authContext"
 
 const AdminDashBoard = () => {
@@ -11,8 +13,13 @@ const AdminDashBoard = () => {
   //   navigate('/login')  
   // }
   return (
-    <div>
+    <div className="flex">
       <AdminSideBar />
+      <div className="flex-1 ml-64 bg-gray-100 h-screen">
+        <Navbar />
+        <AdminSummary/> 
+      </div>
+
     </div>
   )
 }
