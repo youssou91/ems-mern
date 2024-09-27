@@ -3,7 +3,7 @@
 const SummaryCard = ({icon, text, number, color}) => {
   return (
     <div className="rounded flex bg-gray-400 shadow-2xl text-white">
-        <div className={`${color} rounded text-7xl flex justify-center items-center bg-teal-600 px-5`}>
+        <div className={`${color} mrounded text-7xl flex justify-center items-center px-5`}>
             {icon}
         </div>
         <div className="pl-4 py-1">
