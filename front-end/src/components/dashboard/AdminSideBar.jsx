@@ -10,7 +10,7 @@ const AdminSideBar = () => {
                 <h3 className="text-2xl text-center font-pacific">S. G. E.</h3>
             </div>
             <div className="px-4">
-                <NavLink to={"/admin-dashboard"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
+                <NavLink to={"/admin-dashboard"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`} end>
                     <FaTachometerAlt />
                     <span>Tableau de Bord</span>
                 </NavLink>
@@ -18,11 +18,11 @@ const AdminSideBar = () => {
                     <FaUsers />
                     <span>Employes</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/departments"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/departements"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaBuilding />
                     <span>Departements</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/departments/add"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/add"} className="flex items-center space-x-5 block py-4 px-4 rounded">
                     <FaCalendarAlt />
                     <span>to update</span>
                 </NavLink>
