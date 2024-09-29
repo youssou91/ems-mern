@@ -1,40 +1,40 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from 'axios';
 import {createContext, useContext, useEffect, useState } from 'react'
 
 const userContext = createContext()
 
-const authContext = ({ children }) => {
+// eslint-disable-next-line react/prop-types
+const AuthContext = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        const verifyUser = async ()=>{
+        const verifyUser = async () => {
             try {
-                const token = localStorage.getItem('token')
+                const token = localStorage.getItem('token');
                 if (token) {
                     const response = await axios.get('http://localhost:5000/api/auth/verify', {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
-                    })
-                    console.log(response)
+                    });
                     if (response.data.success) {
-                        setUser(response.data.user)
+                        setUser(response.data.user);
                     }
-                }else{
-                    setUser(null)
-                    setLoading(false)
+                } else {
+                    setUser(null);
+                    setLoading(false);
                 }
             } catch (error) {
-                console.error(error)
-                if (error.response && !error.response.data.error) {
-                    setUser(null)
-               }
-            }finally{
-                setLoading(false)
+                console.error("Erreur lors de la vérification de l'utilisateur:", error.response.data);
+                setUser(null);
+            } finally {
+                setLoading(false);
             }
-        }
-        verifyUser()
-    },[])
+        };
+        verifyUser();
+    }, []);
+    
     const login = (user) => {
         setUser(user)
     }
@@ -49,4 +49,4 @@ const authContext = ({ children }) => {
     )
 }
 export const useAuth = ()=>useContext(userContext)
-export default authContext
+export default AuthContext

@@ -20,7 +20,7 @@ const AdminSideBar = () => {
                 </NavLink>
                 <NavLink to={"/admin-dashboard/departements"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaBuilding />
-                    <span>Departements</span>
+                    <span>Départements</span>
                 </NavLink>
                 <NavLink to={"/admin-dashboard/add"} className="flex items-center space-x-5 block py-4 px-4 rounded">
                     <FaCalendarAlt />

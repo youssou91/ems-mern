@@ -7,6 +7,7 @@ import PrivateRoutes from "./utils/PrivateRoutes"
 import RoleBaseRoute from "./utils/RoleBaseRoute"
 import AdminSummary from "./components/dashboard/AdminSummary"
 import DepartementList from "./components/departements/DepartementList"
+import AjoutDepartement from "./components/departements/ajoutDepartement"
 function App() {
 
   return (
@@ -23,6 +24,7 @@ function App() {
       } >
         <Route index element={<AdminSummary/>}></Route>
         <Route path="/admin-dashboard/departements" element={<DepartementList/>}></Route>
+        <Route path="/admin-dashboard/ajout-departement" element={<AjoutDepartement/>}></Route>
       </Route>
       <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
       <Route path="*" element={<Notfound />} />
