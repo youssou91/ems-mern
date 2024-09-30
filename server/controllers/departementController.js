@@ -23,5 +23,15 @@ const ajoutDepartement = async (req, res) => {
     }
 };
 
+const getDepartements = async (req, res) => {
+    try {
+        const departements = await Departement.find();
+        return res.status(200).json({ success: true, departements });
+        
+    } catch (err) {
+        console.error("Erreur lors de la récupération des départements:", err);
+        return res.status(500).json({ success: false, err: "Server Error" });
+    }
+};
 
-export  {ajoutDepartement};
+export  {ajoutDepartement, getDepartements};
