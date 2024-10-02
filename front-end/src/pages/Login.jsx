@@ -64,7 +64,9 @@ const Login = () => {
                     <div className="mb-4">
                         <button className="w-full bg-teal-600 text-white py-2 rounded" type="submit">Connexion</button>
                     </div>
+                    
                 </form>
+                
             </div>
         </div>
     )
