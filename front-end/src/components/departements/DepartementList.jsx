@@ -27,12 +27,11 @@ const DepartementList = () => {
               _id: departement._id,
               sno: sno++,
               nom_dpmt: departement.nom_dpmt,
-              action: (<DepartementButtons/>)
+              action: (<DepartementButtons _id={departement._id}/>)
             }
           ))
           setDepartements(data)
         }
-        console.log(response.data)
       } catch (error) {
         if (error.response.status && !error.response.data.success) {
           alert(error.response.data.err);
@@ -54,7 +53,6 @@ const DepartementList = () => {
           <input className='px-4 py-0.5 border border-gray-300 rounded-md' type="text" placeholder="Recherche par nom dpmt" />
           <Link className='px-4 py-1 bg-teal-500 rounded text-white' to="/admin-dashboard/ajout-departement">Nouveau département   </Link>
         </div>
-        {/* TODO: Afficher la liste des départements */}
         <div>
           <DataTable
             columns={colums} data={departements}

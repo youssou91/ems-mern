@@ -9,16 +9,14 @@ const ajoutDepartement = async (req, res) => {
     }
 
     try {
-        console.log("Tentative d'ajout du département :", { nom_dpmt, description });
+        // console.log("Tentative d'ajout du département :", { nom_dpmt, description });
 
         const newDepartement = new Departement({ nom_dpmt, description });
         await newDepartement.save();
-
-        console.log("Département ajouté avec succès :", newDepartement);
-
+        // console.log("Département ajouté avec succès :", newDepartement);
         return res.status(200).json({ success: true, departement: newDepartement });
     } catch (err) {
-        console.error("Erreur lors de l'ajout du département:", err);
+        // console.error("Erreur lors de l'ajout du département:", err);
         return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
@@ -27,11 +25,33 @@ const getDepartements = async (req, res) => {
     try {
         const departements = await Departement.find();
         return res.status(200).json({ success: true, departements });
-        
     } catch (err) {
-        console.error("Erreur lors de la récupération des départements:", err);
         return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
 
-export  {ajoutDepartement, getDepartements};
+const updateDepartements = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nom_dpmt, description } = req.body;
+        const updateDpt = await Departement.findByIdAndUpdate({_id: id},
+            { nom_dpmt, description }, { new: true });
+        return res.status(200).json({ success: true, departement: updateDpt });
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la mise à jour du département" });
+    }
+}
+
+const getDepartement = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const departements = await Departement.findById({_id:id});
+        return res.status(200).json({success:true, departements})
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la récupération du département" });
+    } finally {
+        
+    }
+}
+
+export  {ajoutDepartement, getDepartement, getDepartements, updateDepartements};
