@@ -54,4 +54,14 @@ const getDepartement = async (req, res) => {
     }
 }
 
-export  {ajoutDepartement, getDepartement, getDepartements, updateDepartements};
+const deleteDepartements = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const deleteDpt = await Departement.findByIdAndDelete({_id: id});
+        return res.status(200).json({ success: true,  deleteDpt });
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la suppression du département" });
+    }
+}
+
+export  {ajoutDepartement, getDepartement, getDepartements, updateDepartements , deleteDepartements};
