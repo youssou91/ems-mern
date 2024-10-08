@@ -14,7 +14,7 @@ const AdminSideBar = () => {
                     <FaTachometerAlt />
                     <span>Tableau de Bord</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/employees"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/employes"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaUsers />
                     <span>Employes</span>
                 </NavLink>
@@ -22,15 +22,15 @@ const AdminSideBar = () => {
                     <FaBuilding />
                     <span>Départements</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/add"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaCalendarAlt />
                     <span>to update</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/departments/add"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/departments/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaMoneyBillWave />
                     <span>Salaire</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/logout"} className="flex items-center space-x-5 block py-4 px-4 rounded">
+                <NavLink to={"/admin-dashboard/logout"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaCogs />
                     <span>Parametres</span>
                 </NavLink>

@@ -55,8 +55,6 @@ const DepartementList = () => {
     const record = departements.filter((dep) =>
     dep.nom_dpmt.toLowerCase().includes(e.target.value.toLowerCase()))
     setFilterDepartements(record)
-    // const filter = e.target.value.toLowerCase();
-    // setDepartements(departements.filter(dep => dep.nom_dpmt.toLowerCase().includes(filter)))
   }
   return (
     <>{depLoading? <div>Loading...</div>:
