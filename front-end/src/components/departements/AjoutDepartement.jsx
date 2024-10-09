@@ -24,8 +24,6 @@ const AjoutDepartement = () => {
                 }
             });
             if (response.data.success) {
-                alert("Département ajouté avec succès !");
-                setDepartement({ nom_dpmt: '', description: '' });
                 navigate('/admin-dashboard/departements');
             }
         } catch (err) {
