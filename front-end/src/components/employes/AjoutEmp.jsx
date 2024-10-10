@@ -59,24 +59,6 @@ const AjoutEmp = () => {
             <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-100">
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-wrap -mx-2">
-                        {/* <div className="w-full md:w-1/2 px-2">
-                            <div className="py-1">
-                                <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_1">Nom de l&apos;employé</label>
-                                <input name="nom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Nom de l&apos;employé" />
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2 px-2">
-                            <div className="py-1">
-                                <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Prénom de l&apos;employé</label>
-                                <input name="prenom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Prénom de l&apos;employé" />
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2 px-2">
-                            <div className="py-1">
-                                <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_1">Email de l&apos;employé</label>
-                                <input name="email" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Email de l&apos;employé" />
-                            </div>
-                        </div> */}
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nomEmp">Nom de l&apos;employé</label>
@@ -133,7 +115,9 @@ const AjoutEmp = () => {
                                 <select name="departement" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
                                     <option value="" selected>Choisissez un département</option>
                                     {departements.map(dpmt => (
-                                        <option key={dpmt.id} value={dpmt.id}>{dpmt.nom_dpmt}</option>
+                                        // <option key={dpmt.id} value={dpmt.id}>{dpmt.nom_dpmt}</option>
+                                        <option key={dpmt._id} value={dpmt._id}>{dpmt.nom_dpmt}</option>
+
                                     ))}
 
                                 </select>

@@ -15,9 +15,9 @@ const userRegister = async () => {
             role: "admin"
         });
         await newUser.save();
-        console.log("Utilisateur enregistré avec succès !");
+        // console.log("Utilisateur enregistré avec succès !");
     } catch (err) {
-        console.error("Erreur lors de l'enregistrement de l'utilisateur :", err);
+        // console.error("Erreur lors de l'enregistrement de l'utilisateur :", err);
     }
 };
 
