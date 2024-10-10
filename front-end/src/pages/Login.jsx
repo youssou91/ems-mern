@@ -9,11 +9,12 @@ const Login = () => {
     const [error, setError] = useState(null)
     const {login} = useAuth()
     const navigate = useNavigate()
-    const handelSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         // const {user} = useContext(userContext)
         e.preventDefault()
         try {
             const response = await axios.post("http://localhost:5000/api/auth/login", { email, password })
+            console.log(response)
             if(response.data) {
                 // alert("Connexion reussie !!!")
                 login(response.data.user)
@@ -41,7 +42,7 @@ const Login = () => {
             <div className="border border-gray-300 shadow-lg p-6 w-100 bg-white rounded">
                 <h2 className="text-2xl font-bold mb-4">Connexion</h2>
                 {error && <div className="text-red-500 text-sm">{error}</div>}
-                <form action="" onSubmit={handelSubmit}>
+                <form action="" onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700" htmlFor="Email">Email</label>
                         <input className="w-full px-3 py-2 border"

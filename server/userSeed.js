@@ -1,20 +1,24 @@
-import User from "./models/user.js"
-import bcrypt from 'bcrypt'
-import connectToDatabase from "./db/db.js"
 
-const userRegister = async () =>{
-    connectToDatabase();
+import User from "./models/User.js";
+import bcrypt from 'bcrypt';
+import connectToDatabase from "./db/db.js";
+
+const userRegister = async () => {
+    await connectToDatabase(); 
     try {
-        const hashePassword = await bcrypt.hash("admin", 10)
+        const hashedPassword = await bcrypt.hash("admin", 10);
         const newUser = new User({
-            name: "Admin",
+            prenom: "AdminPrenom",  // Ajoutez un prénom ici
+            nom: "AdminNom",        // Ajoutez un nom ici
             email: "admin@gmail.com",
-            password: hashePassword,
+            password: hashedPassword,
             role: "admin"
-        })        
-        await newUser.save()
+        });
+        await newUser.save();
+        console.log("Utilisateur enregistré avec succès !");
     } catch (err) {
-        console.log(err)
-    } 
-}
+        console.error("Erreur lors de l'enregistrement de l'utilisateur :", err);
+    }
+};
+
 userRegister();

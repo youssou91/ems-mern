@@ -3,6 +3,8 @@ import Employe from "../models/Employe.js"
 import User from "../models/User.js"
 import bcrypt from 'bcrypt'
 import multer from "multer"
+import path from "path"
+// const path = require('path')
 
 
 const storage = multer.diskStorage({
@@ -31,7 +33,11 @@ const ajoutEmploye = async (req, res) => {
             password,
             role,
         } = req.body
+        // console.log("Password received:", password);
 
+        if (!password) {
+            return res.status(400).json({ success: false, error: 'Le mot de passe est manquant!' });
+        }
         const user = await User.findOne({ email })
         if (user) {
             return res.status(400).json({ success: false, error: 'Email déjà utilisé!' })

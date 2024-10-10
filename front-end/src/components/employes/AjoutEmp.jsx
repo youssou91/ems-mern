@@ -19,13 +19,13 @@ const AjoutEmp = () => {
     }, []);
 
     const handleChange = (e) => {
-        const [name, value, file] = e.target
+        const { name, value, files } = e.target; // Utilisez 'files' pour les fichiers
         if (name === 'image') {
-            setFormData((preData)=>({...preData, [name]: file[0] }))
+            setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
         } else {
-            setFormData((preData)=>({...preData, [name]: value }))
+            setFormData((prevData) => ({ ...prevData, [name]: value }));
         }
-    }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -33,6 +33,7 @@ const AjoutEmp = () => {
         Object.keys(formData).forEach((key) => {
             formDataObj.append(key, formData[key])
         })
+        console.log('FormData:', formData);
         try {
             const response = await axios.post('http://localhost:5000/api/employe/ajout', formDataObj, {
                 headers: {
@@ -40,12 +41,14 @@ const AjoutEmp = () => {
                 }
             });
             if (response.data.success) {
+                console.log(formDataObj);
+
                 navigate('/admin-dashboard/employes');
             }
         } catch (err) {
-           if (err.response.status && !err.response.data.success) {
-            // alert(err.response.data.err);
-           }
+            if (err.response.status && !err.response.data.success) {
+                // alert(err.response.data.err);
+            }
         }
     }
     return (
@@ -56,28 +59,46 @@ const AjoutEmp = () => {
             <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-100">
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-wrap -mx-2">
-                        <div className="w-full md:w-1/2 px-2">
+                        {/* <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_1">Nom de l&apos;employé</label>
-                                <input name="nomEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Nom de l&apos;employé" />
+                                <input name="nom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Nom de l&apos;employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Prénom de l&apos;employé</label>
-                                <input name="prenomEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Prénom de l&apos;employé" />
+                                <input name="prenom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Prénom de l&apos;employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_1">Email de l&apos;employé</label>
-                                <input name="emailEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Email de l&apos;employé" />
+                                <input name="email" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Email de l&apos;employé" />
+                            </div>
+                        </div> */}
+                        <div className="w-full md:w-1/2 px-2">
+                            <div className="py-1">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="nomEmp">Nom de l&apos;employé</label>
+                                <input name="nom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Nom de l'employé" />
+                            </div>
+                        </div>
+                        <div className="w-full md:w-1/2 px-2">
+                            <div className="py-1">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="prenomEmp">Prénom de l&apos;employé</label>
+                                <input name="prenom" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Prénom de l'employé" />
+                            </div>
+                        </div>
+                        <div className="w-full md:w-1/2 px-2">
+                            <div className="py-1">
+                                <label className="text-sm font-medium text-gray-700" htmlFor="emailEmp">Email de l&apos;employé</label>
+                                <input name="email" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Email de l'employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Date de Naissance de l&apos;employé</label>
-                                <input name="dateNaissEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="date" placeholder="Date de Naissance de l&apos;employé" />
+                                <input name="dateNaissance" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="date" placeholder="Date de Naissance de l&apos;employé" />
                             </div>
                         </div>
                     </div>
@@ -86,7 +107,7 @@ const AjoutEmp = () => {
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_3">Genre de l&apos;employé</label>
-                                <select name="genreEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                <select name="sexe" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
                                     <option value="" selected>Choisissez un genre</option>
                                     <option value="Homme">Homme</option>
                                     <option value="Femme">Femme</option>
@@ -96,7 +117,7 @@ const AjoutEmp = () => {
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_3">Statut de l&apos;employé</label>
-                                <select name="statutEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                <select name="statut" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
                                     <option value="" selected>Choisissez un statut</option>
                                     <option value="Actif">Actif</option>
                                     <option value="Inactif">Inactif</option>
@@ -109,7 +130,7 @@ const AjoutEmp = () => {
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_1">Département de l&apos;employé</label>
-                                <select name="statutEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                <select name="departement" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
                                     <option value="" selected>Choisissez un département</option>
                                     {departements.map(dpmt => (
                                         <option key={dpmt.id} value={dpmt.id}>{dpmt.nom_dpmt}</option>
@@ -121,31 +142,31 @@ const AjoutEmp = () => {
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Designation de l&apos;employé</label>
-                                <input name="designationEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Designation de l&apos;employé" />
+                                <input name="designation" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Designation de l&apos;employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Salaire de l&apos;employé</label>
-                                <input name="salaireEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="number" placeholder="Salaire de l&apos;employé" />
+                                <input name="salaire" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="number" placeholder="Salaire de l&apos;employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Mot de pass de l&apos;employé</label>
-                                <input name="designationEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="password" placeholder="***********" />
+                                <input name="password" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="password" placeholder="***********" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Matricule de l&apos;employé</label>
-                                <input name="matriculeEmp" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Matricule de l&apos;employé" />
+                                <input name="matricule" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="text" placeholder="Matricule de l&apos;employé" />
                             </div>
                         </div>
                         <div className="w-full md:w-1/2 px-2">
                             <div className="py-1">
                                 <label className="text-sm font-medium text-gray-700" htmlFor="nom_dpmt_2">Photo de l&apos;employé</label>
-                                <input name="imageEmp" onChange={handleChange} accept="image/*" className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="file" />
+                                <input name="image" onChange={handleChange} accept="image/*" className="mt-1 w-full p-2 border border-gray-300 rounded-md" type="file" />
                             </div>
                         </div>
                     </div>

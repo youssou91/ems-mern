@@ -8,30 +8,36 @@ const userContext = createContext()
 const AuthContext = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+   
     useEffect(() => {
         const verifyUser = async () => {
             try {
                 const token = localStorage.getItem('token');
-                if (token) {
-                    const response = await axios.get('http://localhost:5000/api/auth/verify', {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-                    if (response.data.success) {
-                        setUser(response.data.user);
-                    }
-                } else {
+                if (!token) {
                     setUser(null);
                     setLoading(false);
+                    return; // Ne pas continuer si le token est absent
+                }
+                
+                const response = await axios.get('http://localhost:5000/api/auth/verify', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (response.data.success) {
+                    setUser(response.data.user);
+                } else {
+                    setUser(null);
                 }
             } catch (error) {
-                console.error("Erreur lors de la vérification de l'utilisateur:", error.response.data);
+                console.error("Erreur lors de la vérification de l'utilisateur:", error?.response?.data);
                 setUser(null);
             } finally {
                 setLoading(false);
             }
         };
+        
         verifyUser();
     }, []);
     
