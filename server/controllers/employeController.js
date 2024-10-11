@@ -133,7 +133,7 @@ const ajoutEmploye = async (req, res) => {
             employeId: generatedEmployeId, // Utiliser l'employeId généré si absent
             dateNaissance,
             sexe,
-            statutMatrimonial,
+            statutMatrimonial,//a ajouter cote front 
             designation,
             departement,
             salaire,

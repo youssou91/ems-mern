@@ -6,7 +6,7 @@ import axios from "axios"
 // eslint-disable-next-line react-refresh/only-export-components
 export const colums = [
     {
-        name: 'S No',
+        name: 'No',
         selector: (row) => row.sno
     },
     {
@@ -34,7 +34,6 @@ export const DepartementButtons = ({ _id, onDeleteDepartement}) => {
                 if (response.data.success) {
                     onDeleteDepartement(_id)
                     navigate('/admin-dashboard/departements')
-                    
                 }
                 console.log(response.data);
             } catch (error) {
