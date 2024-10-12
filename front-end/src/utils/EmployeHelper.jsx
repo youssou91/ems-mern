@@ -1,4 +1,7 @@
 import axios from "axios";
+/* eslint-disable react/prop-types */
+import { FaEdit, FaMoneyBillWave, FaMoneyBillWaveAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 export const fetchDepartement = async () => {
     let departements
     try {
@@ -14,18 +17,19 @@ export const fetchDepartement = async () => {
         if (error.response.status && !error.response.data.success) {
             alert(error.response.data.err);
         }
-    } 
+    }
     return departements
 }
-/* eslint-disable react/prop-types */
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const colums = [
+export const colonnes = [
     {
         name: 'No',
         selector: (row) => row.no
+    },
+    {
+        name: 'Image ',
+        // selfSelector: (row) => row.profileImage,
+        cell: (row) => <img src={row.profileImage} alt="Profile" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />,
     },
     {
         name: 'Nom ',
@@ -33,13 +37,13 @@ export const colums = [
         sortable: true
     },
     {
-        name: 'Prenom ',
+        name: 'Prénom ',
         selector: (row) => row.prenom,
         sortable: true
     },
     {
-        name: 'Poste ',
-        selector: (row) => row.designation,
+        name: 'Département ',
+        selector: (row) => row.departement,
         sortable: true
     },
     {
@@ -48,10 +52,8 @@ export const colums = [
     }
 ];
 
-export const EmployeButtons = ({ _id}) => {
-    // const [departement, setDepartement] = useState([]);
+export const EmployeButtons = ({ _id }) => {
     const navigate = useNavigate()
-    
     return (
         <div className="flex justify-between gap-1 ">
             <button onClick={() => navigate(`/admin-dashboard/departement/${_id}`)}
@@ -59,16 +61,16 @@ export const EmployeButtons = ({ _id}) => {
                 <FaEdit />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/departement/${_id}`)}
-                className="flex px-3 py-3 text-medium font-medium text-white bg-red-500 rounded-md hover:bg-red-600">
-                <FaTrash />
+                className="flex px-3 py-3 text-medium font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600">
+                <FaMoneyBillWaveAlt />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/departement/${_id}`)}
                 className="flex px-3 py-3 text-medium font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600">
                 <FaEdit />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/departement/${_id}`)}
-                className="flex px-3 py-3 text-medium font-medium text-white bg-red-500 rounded-md hover:bg-red-600">
-                <FaTrash />
+                className="flex px-3 py-3 text-medium font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
+                <FaMoneyBillWave />
             </button>
         </div>
     )

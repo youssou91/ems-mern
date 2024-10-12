@@ -79,7 +79,8 @@ const ajoutEmploye = async (req, res) => {
 
 const getEmployes = async (req, res) => {
     try {
-        const employes = await Employe.find();
+        // const employes = await Employe.find();
+        const employes = await Employe.find().populate('userId', {password: 0}).populate("departement");
         return res.status(200).json({ success: true, employes });
     } catch (err) {
         return res.status(500).json({ success: false, err: "Server Error" });
