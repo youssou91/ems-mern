@@ -1,20 +1,21 @@
 // import React from 'react'
 
 import { useEffect, useState } from "react"
+import { fetchDepartement } from "../../utils/EmployeHelper";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 
 
 const AjoutEmp = () => {
     const navigate = useNavigate();
-    const [employes, setEmplyes] = useState([])
+    const [departements, setDepartements] = useState([])
     const [formData, setFormData] = useState({})
     useEffect(() => {
-        const getEmploye = async () => {
-            const employe = await fetchEmploye()
-            setEmplyes(employe)
+        const getDepartement = async () => {
+            const departements = await fetchDepartement()
+            setDepartements(departements)
         }
-        getEmploye()
+        getDepartement()
     }, []);
 
     const handleChange = (e) => {

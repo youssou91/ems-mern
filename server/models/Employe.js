@@ -7,7 +7,7 @@ const employeSchema = new Schema({
     employeId: { type: String, unique: true, required: true }, // employeId est maintenant requis
     dateNaissance: { type: Date },
     sexe: { type: String },
-    statutMatrimonial: { type: String },//a ajouter 
+    statutMatrimonial: { type: String },
     designation: { type: String },
     departement: { type: Schema.Types.ObjectId, ref: 'Departement' },
     salaire: { type: Number, required: true },
