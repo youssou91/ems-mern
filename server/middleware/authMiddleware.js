@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js'; 
 
-const verifyUser = async (req, res, next) => {
+const verifyUser = async (req, res, next) => { 
     try {
         // Vérifier si l'en-tête Authorization est présent
         if (!req.headers.authorization) {

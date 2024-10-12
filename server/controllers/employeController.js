@@ -18,76 +18,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-// const ajoutEmploye = async (req, res) => {
-//     try {
-//         const {
-//             nom,
-//             prenom,
-//             email,
-//             employeId,
-//             dateNaissance,
-//             sexe,
-//             statutMatrimonial,
-//             designation,
-//             departement,
-//             salaire,
-//             password,
-//             role,
-//         } = req.body;
-
-//         // Vérification du mot de passe
-//         if (!password) {
-//             return res.status(400).json({ success: false, error: 'Le mot de passe est manquant!' });
-//         }
-
-//         // Vérification de l'email dans la collection User
-//         const user = await User.findOne({ email });
-//         if (user) {
-//             return res.status(400).json({ success: false, error: 'Email déjà utilisé!' });
-//         }
-
-//         // Vérification de l'unicité de employeId dans la collection Employe
-//         if (employeId) {
-//             const existingEmploye = await Employe.findOne({ employeId });
-//             if (existingEmploye) {
-//                 return res.status(400).json({ success: false, error: 'employeId déjà utilisé!' });
-//             }
-//         }
-
-//         // Hachage du mot de passe
-//         const hashedPassword = await bcrypt.hash(password, 10);
-        
-//         // Création d'un nouvel utilisateur
-//         const newUser = new User({
-//             nom: nom,
-//             prenom: prenom,
-//             email: email,
-//             password: hashedPassword,
-//             role: role,
-//             profileImage: req.file ? req.file.filename : "",
-//         });
-
-//         const saveUser = await newUser.save();
-
-//         // Création d'un nouvel employé
-//         const newEmploye = new Employe({
-//             userId: saveUser._id,
-//             employeId,
-//             dateNaissance,
-//             sexe,
-//             statutMatrimonial,
-//             designation,
-//             departement,
-//             salaire
-//         });
-
-//         await newEmploye.save();
-//         return res.status(200).json({ success: true, message: "Employé créé avec succès !!" });
-//     } catch (error) {
-//         console.error("Erreur lors de l'ajout de l'employé :", error.message);
-//         return res.status(500).json({ success: false, error: 'Erreur lors de l\'ajout de l\'employé !!' });
-//     }
-// }
 const ajoutEmploye = async (req, res) => {
     try {
         const {
@@ -147,21 +77,47 @@ const ajoutEmploye = async (req, res) => {
     }
 };
 
+const getEmployes = async (req, res) => {
+    try {
+        const employes = await Employe.find();
+        return res.status(200).json({ success: true, employes });
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Server Error" });
+    }
+};
 
 const updateEmploye = async (req, res) => {
-
-}
-
-const deleteEmploye = async (req, res) => {
-
-}
-
-const getEmployes = async (req, res) => {
-
+    try {
+        const { id } = req.params;
+        const { nom_dpmt, description } = req.body;
+        const updateDpt = await Departement.findByIdAndUpdate({_id: id},
+            { nom_dpmt, description }, { new: true });
+        return res.status(200).json({ success: true, departement: updateDpt });
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la mise à jour du département" });
+    }
 }
 
 const getEmployeById = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const departements = await Departement.findById({_id:id});
+        return res.status(200).json({success:true, departements})
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la récupération du département" });
+    } finally {
+        
+    }
+}
 
+const deleteEmploye = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const deleteDpt = await Departement.findByIdAndDelete({_id: id});
+        return res.status(200).json({ success: true,  deleteDpt });
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur lors de la suppression du département" });
+    }
 }
 
 export {upload, ajoutEmploye, updateEmploye, deleteEmploye, getEmployes, getEmployeById };
