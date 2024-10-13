@@ -99,15 +99,19 @@ const updateEmploye = async (req, res) => {
     }
 }
 
+
+
 const getEmployeById = async (req, res) => {
+    console.log("Employe ID:", req.params.id); // Vérifier l'ID reçu par le serveur
     try {
-        const {id} = req.params;
-        const departements = await Departement.findById({_id:id});
-        return res.status(200).json({success:true, departements})
-    } catch (err) {
-        return res.status(500).json({ success: false, err: "Erreur lors de la récupération du département" });
-    } finally {
-        
+        const employe = await Employe.findById(req.params.id);
+        if (!employe) {
+            return res.status(404).json({ success: false, message: 'Employé non trouvé' });
+        }
+        res.status(200).json({ success: true, employe });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Erreur serveur' });
     }
 }
 

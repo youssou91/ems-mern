@@ -10,6 +10,7 @@ import connectToDatabase from './db/db.js'
 // Connexion a la base de donnees MongoDB 
 connectToDatabase()
 const app = express()
+app.use(express.static('public/uploads'))
 app.use(cors())
 app.use(express.json())
 app.use('/api/auth', authRouter) // Use user router for authentication endpoints

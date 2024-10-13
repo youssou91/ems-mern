@@ -30,7 +30,7 @@ const ListEmp = () => {
               nom: employe.userId?.nom || "Nom manquant", // Si "nom" n'existe pas, affiche un placeholder
               prenom: employe.userId?.prenom || "Prénom manquant",
               departement: employe.departement?.nom_dpmt || "Département manquant",
-              profileImage: employe.userId?.profileImage || "https://via.placeholder.com/50", // Placeholder si l'image est manquante
+              profileImage:<img src={`http://localhost:5000/${ employe.userId.profileImage}`}  style={{ width: '50px', height: '50px', borderRadius: '50%' }} /> || "https://via.placeholder.com/50", // Placeholder si l'image est manquante
               action: (<EmployeButtons id={employe._id} />)
             }
           ));
