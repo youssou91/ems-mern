@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt'
 import multer from "multer"
 import path from "path"
 // const path = require('path')
+import mongoose from 'mongoose';  // Ajoutez ceci en haut de votre fichier
+// import Employe from '../models/Employe';  // Assurez-vous que le chemin est correct
 
 
 const storage = multer.diskStorage({
@@ -79,13 +81,71 @@ const ajoutEmploye = async (req, res) => {
 
 const getEmployes = async (req, res) => {
     try {
-        // const employes = await Employe.find();
         const employes = await Employe.find().populate('userId', {password: 0}).populate("departement");
         return res.status(200).json({ success: true, employes });
     } catch (err) {
         return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
+const getEmploye = async (req, res) => {
+    const { id } = req.params; // Assure-toi que le paramètre est "id" pour correspondre à la route
+    try {
+        // Cherche l'employé avec employeId ou _id et remplis les informations liées
+        const employe = await Employe.findOne({ employeId: id })
+            .populate('userId', { password: 0 }) // Exclure le mot de passe
+            .populate('departement'); // Popule aussi les détails du département
+        
+        if (employe) {
+            console.log(employe.employeId); // Utilise console.log pour debug
+            return res.status(200).json({ success: true, employe });
+        } else {
+            return res.status(404).json({ success: false, message: "Employé non trouvé." });
+        }
+    } catch (err) {
+        return res.status(500).json({ success: false, err: "Erreur serveur." });
+    }
+};
+
+// const getEmploye = async (req, res) => {
+//     const { employeId } = req.params;
+//     try {
+//         const employe = await Employe.findOne({ employeId }).populate('userId', { password: 0 }).populate('departement');
+//         if (employe) {
+//             alert(employe.employeId)
+//             return res.status(200).json({ success: true, employe });
+//         } else {
+//             return res.status(404).json({ success: false, message: "Employé non trouvé." });
+//         }
+//     } catch (err) {
+//         return res.status(500).json({ success: false, err: "Erreur serveur." });
+//     }
+// };
+
+
+const getEmployeById = async (req, res) => {
+    try {
+        const { id } = req.params;  // Récupère l'ID de l'employé à partir des paramètres de la requête
+        // Vérification de la validité de l'ID
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, err: "ID d'employé invalide." });
+        }
+        // Recherche de l'employé par ID avec peuplement des champs nécessaires
+        const employe = await Employe.findById(employeId)
+            .populate('userId', { password: 0 })  // Exclure le mot de passe de l'utilisateur
+            .populate('departement'); // Peupler le champ du département
+        // Vérification si l'employé existe
+        if (!employe) {
+            return res.status(404).json({ success: false, err: "Employé non trouvé." });
+        }
+        // Retourner les détails de l'employé
+        return res.status(200).json({ success: true, employe });
+    } catch (err) {
+        console.error(err);  // Log l'erreur pour le débogage
+        return res.status(500).json({ success: false, err: "Erreur lors de la récupération de l'employé." });
+    }
+};
+
+export default getEmployeById;
 
 const updateEmploye = async (req, res) => {
     try {
@@ -101,20 +161,6 @@ const updateEmploye = async (req, res) => {
 
 
 
-const getEmployeById = async (req, res) => {
-    console.log("Employe ID:", req.params.id); // Vérifier l'ID reçu par le serveur
-    try {
-        const employe = await Employe.findById(req.params.id);
-        if (!employe) {
-            return res.status(404).json({ success: false, message: 'Employé non trouvé' });
-        }
-        res.status(200).json({ success: true, employe });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Erreur serveur' });
-    }
-}
-
 const deleteEmploye = async (req, res) => {
     try {
         const {id} = req.params;
@@ -125,4 +171,4 @@ const deleteEmploye = async (req, res) => {
     }
 }
 
-export {upload, ajoutEmploye, updateEmploye, deleteEmploye, getEmployes, getEmployeById };
+export {upload, ajoutEmploye, updateEmploye, deleteEmploye, getEmployes, getEmployeById, getEmploye };

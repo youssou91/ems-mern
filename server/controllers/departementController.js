@@ -49,9 +49,7 @@ const getDepartement = async (req, res) => {
         return res.status(200).json({success:true, departements})
     } catch (err) {
         return res.status(500).json({ success: false, err: "Erreur lors de la récupération du département" });
-    } finally {
-        
-    }
+    } 
 }
 
 const deleteDepartements = async (req, res) => {

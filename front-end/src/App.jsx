@@ -34,7 +34,9 @@ function App() {
           {/* employes */}
           <Route path="/admin-dashboard/employes" element={<ListEmp />}></Route>
           <Route path="/admin-dashboard/ajout-employe" element={<AjoutEmp />}></Route>
-          <Route path="/admin-dashboard/employe/:id" element={<VoirEmp />}></Route>
+          <Route path="/admin-dashboard/employes/:id" element={<VoirEmp />}></Route>
+
+
         </Route>
         <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
         <Route path="*" element={<Notfound />} />

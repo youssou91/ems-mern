@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 const EditDepartement = () => {
     const { id } = useParams();
+    console.log(id);
     const [departement, setDepartement] = useState(null); // Initialiser avec `null`
     const [loadingDepartement, setLoadingDepartement] = useState(true);
     const navigate = useNavigate();

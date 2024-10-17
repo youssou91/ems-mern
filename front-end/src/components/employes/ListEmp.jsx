@@ -19,10 +19,8 @@ const ListEmp = () => {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
         })
-        console.log(response.data.employes)
         if (response) {
           let no = 1;
-          
           const data = response.data.employes.map((employe) => (
             {
               _id: employe._id,
@@ -34,7 +32,6 @@ const ListEmp = () => {
               action: (<EmployeButtons id={employe._id} />)
             }
           ));
-          
           setEmployes(data)
           setFilterEmployes(data)
         }

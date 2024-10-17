@@ -21,7 +21,6 @@ export const colums = [
 ];
 
 export const DepartementButtons = ({ _id, onDeleteDepartement}) => {
-    // const [departement, setDepartement] = useState([]);
     const navigate = useNavigate()
     const handleDelete = async (_id) => {
         if (window.confirm('Etes-vous sur de vouloir supprimer ce département?')) {

@@ -4,6 +4,7 @@ import authRouter from './routes/auth.js'
 import departementRouter from './routes/departement.js'
 import employeRouter from './routes/employe.js'
 
+
 import connectToDatabase from './db/db.js'
 
 
@@ -13,10 +14,9 @@ const app = express()
 app.use(express.static('public/uploads'))
 app.use(cors())
 app.use(express.json())
-app.use('/api/auth', authRouter) // Use user router for authentication endpoints
-app.use('/api/departement', departementRouter) // Use departement router for departement endpoints
-
-app.use('/api/employe', employeRouter) // Use employe router for employe endpoints
+app.use('/api/auth', authRouter) 
+app.use('/api/departement', departementRouter) 
+app.use('/api/employe', employeRouter) 
 
 
 app.listen(process.env.PORT, ()=>{
