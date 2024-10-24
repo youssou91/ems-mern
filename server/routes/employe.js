@@ -6,7 +6,11 @@ const router = exp.Router();
 
 router.get('/', authmiddleware, getEmployes);
 router.post('/ajout', authmiddleware, upload.single('image'), ajoutEmploye);
-router.get('/:id', getEmploye);
+router.get('/:id', getEmploye);// Route pour récupérer un employé par son ID
+router.get('/api/employes/:id', getEmploye);
+
+
+
 
 // router.get('/:id', authmiddleware, getEmployeById);
 // router.put('/:id', authmiddleware, updateEmploye);

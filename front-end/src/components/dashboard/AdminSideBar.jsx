@@ -1,7 +1,7 @@
 // import React from 'react'
 
 import { NavLink } from "react-router-dom"
-import { FaBuilding, FaCalendarAlt, FaCogs, FaMoneyBillWave, FaTachometerAlt, FaUsers } from 'react-icons/fa'
+import { FaBuilding, FaCogs, FaMoneyBillWave, FaTachometerAlt, FaUsers } from 'react-icons/fa'
 
 const AdminSideBar = () => {
     return (
@@ -22,15 +22,15 @@ const AdminSideBar = () => {
                     <FaBuilding />
                     <span>Départements</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
+                {/* <NavLink to={"/admin-dashboard/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaCalendarAlt />
                     <span>to update</span>
-                </NavLink>
-                <NavLink to={"/admin-dashboard/departments/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
+                </NavLink> */}
+                <NavLink to={"/admin-dashboard/salaires"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaMoneyBillWave />
                     <span>Salaire</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/logout"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
+                <NavLink to={"/admin-dashboard/parametres"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaCogs />
                     <span>Parametres</span>
                 </NavLink>

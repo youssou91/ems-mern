@@ -91,12 +91,15 @@ const getEmploye = async (req, res) => {
     const { id } = req.params; // Assure-toi que le paramètre est "id" pour correspondre à la route
     try {
         // Cherche l'employé avec employeId ou _id et remplis les informations liées
-        const employe = await Employe.findOne({ employeId: id })
-            .populate('userId', { password: 0 }) // Exclure le mot de passe
-            .populate('departement'); // Popule aussi les détails du département
-        
+        // const employe = await Employe.findOne({ _id: id })
+        //     .populate('userId', { password: 0 }) // Exclure le mot de passe
+        //     .populate('departement'); // Popule aussi les détails du département
+        const employe = await Employe.findOne({ employeId: id });
+        if (!employe) {
+            return res.status(404).json({ success: false, message: "Employé non trouvé." });
+        }
         if (employe) {
-            console.log(employe.employeId); // Utilise console.log pour debug
+            console.log(employe._id); // Utilise console.log pour debug
             return res.status(200).json({ success: true, employe });
         } else {
             return res.status(404).json({ success: false, message: "Employé non trouvé." });
