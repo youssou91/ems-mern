@@ -34,19 +34,16 @@ function App() {
           <Route path="/admin-dashboard/ajout-departement" element={<AjoutDepartement />}></Route>
           <Route path="/admin-dashboard/departement/:id" element={<EditDepartement />}></Route>
           {/* employes */}
-          <Route path="/admin-dashboard/employes" element={<ListEmp />}></Route>
+          <Route path="/admin-dashboard/employe" element={<ListEmp />}></Route>
           <Route path="/admin-dashboard/ajout-employe" element={<AjoutEmp />}></Route>
-          <Route path="/admin-dashboard/employes/:id" element={<VoirEmp />}></Route>
-          <Route path="/admin-dashboard/employes/:id" element={<VoirEmp />} />
+          <Route path="/admin-dashboard/employe/:id" element={<VoirEmp />}></Route>
+          <Route path="/admin-dashboard/employe/:id" element={<VoirEmp />}></Route>
           {/* Salaires */}
-          <Route path="/admin-dashboard/salaires" element={<ListSalaire/>} />
+          <Route path="/admin-dashboard/salaires" element={<ListSalaire/>}></Route>
           {/* Parametres */}
-          <Route path="/admin-dashboard/parametres" element={<Parametres />} />
-
-
-
+          <Route path="/admin-dashboard/parametres" element={<Parametres />}></Route>
         </Route>
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>

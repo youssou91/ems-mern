@@ -10,7 +10,7 @@ const VoirEmp = () => {
     useEffect(() => {
         const fetchEmploye = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/employes/${id}`);
+                const response = await axios.get(`http://localhost:5000/api/employe/${id}`);
                 setEmploye(response.data.employes);
                 setLoading(true); 
                 console.log(response.data.employes);
