@@ -3,27 +3,27 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const VoirEmp = () => {
-    const { id } = useParams();
-    const [employe, setEmploye] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const { Id } = useParams();
+    const [employe, setEmploye] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     useEffect(() => {
         const fetchEmploye = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/employe/${id}`);
+                const response = await axios.get(`http://localhost:5000/api/employe/${Id}`);
                 setEmploye(response.data.employes);
-                setLoading(true); 
                 console.log(response.data.employes);
+                setLoading(true); 
             } catch (error) {
                 console.log(error);
                 setError("Erreur lors de la récupération des données de l'employé !!");
                 setLoading(false); 
             }
         };
-        if (id) {
+        if (Id) {
             fetchEmploye();
         }
-    }, [id]);
+    }, [Id]);
     if (loading) return <p>Chargement...</p>;
     if (error) return <p>{error}</p>;
     return (

@@ -14,7 +14,7 @@ const AdminSideBar = () => {
                     <FaTachometerAlt />
                     <span>Tableau de Bord</span>
                 </NavLink>
-                <NavLink to={"/admin-dashboard/employe"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
+                <NavLink to={"/admin-dashboard/employes"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaUsers />
                     <span>Employes</span>
                 </NavLink>
@@ -22,10 +22,6 @@ const AdminSideBar = () => {
                     <FaBuilding />
                     <span>Départements</span>
                 </NavLink>
-                {/* <NavLink to={"/admin-dashboard/add"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
-                    <FaCalendarAlt />
-                    <span>to update</span>
-                </NavLink> */}
                 <NavLink to={"/admin-dashboard/salaires"} className={({isActive}) => `${isActive? "bg-teal-500" : " "} flex items-center space-x-5 block py-2.5 px-4 rounded`}>
                     <FaMoneyBillWave />
                     <span>Salaire</span>

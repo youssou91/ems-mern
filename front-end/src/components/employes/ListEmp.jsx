@@ -5,16 +5,16 @@ import { EmployeButtons, colonnes} from "../../utils/EmployeHelper"
 import DataTable from "react-data-table-component"
 
 const ListEmp = () => {
-  const [depLoading, setDepLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const [employes, setEmployes] = useState([])
+  const [depLoading, setDepLoading] = useState(false)
   const [filterEmployes, setFilterEmployes] = useState([])
 
   useEffect(() => {
     const fetchEmploye = async () => {
       setDepLoading(true)  
       try {
-        const response = await axios.get('http://localhost:5000/api/employe', {
+        const response = await axios.get('http://localhost:5000/api/employes', {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
@@ -29,7 +29,7 @@ const ListEmp = () => {
               prenom: employe.userId?.prenom || "Prénom manquant",
               departement: employe.departement?.nom_dpmt || "Département manquant",
               profileImage:<img src={`http://localhost:5000/${ employe.userId.profileImage}`}  style={{ width: '50px', height: '50px', borderRadius: '50%' }} /> || "https://via.placeholder.com/50", // Placeholder si l'image est manquante
-              action: (<EmployeButtons id={employe._id} />)
+              action: (<EmployeButtons Id = {employe._id} />)
             }
           ));
           setEmployes(data)

@@ -16,7 +16,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/api/auth', authRouter) 
 app.use('/api/departement', departementRouter) 
-app.use('/api/employe', employeRouter) 
+app.use('/api/employes', employeRouter) 
 
 
 app.listen(process.env.PORT, ()=>{
