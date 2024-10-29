@@ -84,26 +84,31 @@ const getEmployes = async (req, res) => {
         return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
-
-const getEmploye = async (req, res) => {
-    const { id } = req.params; // Récupère l'id de la requête
+const getEmployee = async (req, res) => {
+    const { id } = req.params;
     try {
-        // Cherche l'employé avec employeId ou _id et remplit les informations liées
-        const employe = await Employe.findById(id)
-            .populate('userId', { password: 0 }) // Exclure le mot de passe
-            .populate('departement'); // Peupler aussi les détails du département
-
-        if (!employe) {
-            return res.status(404).json({ success: false, message: "Employé non trouvé." });
-        }
-        // if (!mongoose.Types.ObjectId.isValid(id)) {
-        //     return res.status(400).json({ success: false, err: "ID d'employé invalide." });
-        // }        
+        const employe = await Employe.findById({_id: id}).populate('userId', {password: 0}).populate("departement");
         return res.status(200).json({ success: true, employe });
     } catch (err) {
-        console.error("Erreur lors de la récupération de l'employé :", err.message);
-        return res.status(500).json({ success: false, err: "Erreur serveur." });
+        return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
 
-export {upload, ajoutEmploye, getEmployes, getEmploye };
+// const getEmploye = async (req, res) => {
+//     const { Id } = req.params; // Récupère l'id de la requête
+//     try {
+//         // Cherche l'employé avec employeId ou _id et remplit les informations liées
+//         const employe = await Employe.findById(Id)
+//             .populate('userId', { password: 0 }) // Exclure le mot de passe
+//             .populate('departement'); // Peupler aussi les détails du département
+//         if (!employe) {
+//             return res.status(404).json({ success: false, message: "Employé non trouvé." });
+//         }      
+//         return res.status(200).json({ success: true, employe });
+//     } catch (err) {
+//         console.error("Erreur lors de la récupération de l'employé :", err.message);
+//         return res.status(500).json({ success: false, err: "Erreur serveur." });
+//     }
+// };
+
+export {upload, ajoutEmploye, getEmployes, getEmployee };

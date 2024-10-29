@@ -57,9 +57,7 @@ const ListEmp = () => {
           <Link className='px-4 py-1 bg-teal-500 rounded text-white' to="/admin-dashboard/ajout-employe">Nouveau employe   </Link>
         </div>
         <div>
-          <DataTable
-            columns={colonnes} data={filterEmployes} pagination
-          />
+          <DataTable  columns={colonnes} data={filterEmployes} pagination />
         </div>
       </div>
     }</>
