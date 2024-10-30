@@ -4,7 +4,6 @@ import User from "../models/User.js"
 import bcrypt from 'bcrypt'
 import multer from "multer"
 import path from "path"
-import mongoose from 'mongoose';  // Ajoutez ceci en haut de votre fichier
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -26,6 +25,7 @@ const ajoutEmploye = async (req, res) => {
             employeId, // cette valeur peut être fournie, sinon elle sera générée
             dateNaissance,
             sexe,
+            statut,
             statutMatrimonial,
             designation,
             departement,
@@ -62,6 +62,7 @@ const ajoutEmploye = async (req, res) => {
             employeId: generatedEmployeId, // Utiliser l'employeId généré si absent
             dateNaissance,
             sexe,
+            statut,
             statutMatrimonial,
             designation,
             departement,
@@ -93,22 +94,5 @@ const getEmployee = async (req, res) => {
         return res.status(500).json({ success: false, err: "Server Error" });
     }
 };
-
-// const getEmploye = async (req, res) => {
-//     const { Id } = req.params; // Récupère l'id de la requête
-//     try {
-//         // Cherche l'employé avec employeId ou _id et remplit les informations liées
-//         const employe = await Employe.findById(Id)
-//             .populate('userId', { password: 0 }) // Exclure le mot de passe
-//             .populate('departement'); // Peupler aussi les détails du département
-//         if (!employe) {
-//             return res.status(404).json({ success: false, message: "Employé non trouvé." });
-//         }      
-//         return res.status(200).json({ success: true, employe });
-//     } catch (err) {
-//         console.error("Erreur lors de la récupération de l'employé :", err.message);
-//         return res.status(500).json({ success: false, err: "Erreur serveur." });
-//     }
-// };
 
 export {upload, ajoutEmploye, getEmployes, getEmployee };

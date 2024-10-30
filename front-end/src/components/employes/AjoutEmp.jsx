@@ -35,7 +35,7 @@ const AjoutEmp = () => {
         })
         console.log('FormData:', formData);
         try {
-            const response = await axios.post('http://localhost:5000/api/employe/ajout', formDataObj, {
+            const response = await axios.post('http://localhost:5000/api/employes/ajout', formDataObj, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -115,7 +115,6 @@ const AjoutEmp = () => {
                                 <select name="departement" onChange={handleChange} className="mt-1 w-full p-2 border border-gray-300 rounded-md">
                                     <option value="" selected>Choisissez un département</option>
                                     {departements.map(dpmt => (
-                                        // <option key={dpmt.id} value={dpmt.id}>{dpmt.nom_dpmt}</option>
                                         <option key={dpmt._id} value={dpmt._id}>{dpmt.nom_dpmt}</option>
 
                                     ))}

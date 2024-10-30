@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { FaEdit, FaMoneyBillWave, FaMoneyBillWaveAlt } from "react-icons/fa";
+import { FaEdge, FaEdit, FaEye, FaMoneyBillWave, FaMoneyBillWaveAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 export const fetchDepartement = async () => {
     let departements
@@ -61,15 +61,15 @@ export const EmployeButtons = ({Id}) => {
         <div className="flex justify-between gap-1 ">
             <button onClick={() => navigate(`/admin-dashboard/employe/${Id}`)}
                 className="flex px-3 py-3 text-medium font-medium text-white bg-green-500 rounded-md hover:bg-green-600">
-                <FaEdit />
+                <FaEye />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/employe/${Id}`)}
                 className="flex px-3 py-3 text-medium font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600">
-                <FaMoneyBillWaveAlt />
+                < FaEdit  />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/employe/${Id}`)}
                 className="flex px-3 py-3 text-medium font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600">
-                <FaEdit />
+                <FaMoneyBillWaveAlt />
             </button>
             <button onClick={() => navigate(`/admin-dashboard/employe/${Id}`)}
                 className="flex px-3 py-3 text-medium font-medium text-white bg-red-500 rounded-md hover:bg-red-600">

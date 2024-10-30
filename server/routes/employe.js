@@ -4,6 +4,5 @@ import { ajoutEmploye,  getEmployes, upload, getEmployee } from "../controllers/
 const router = exp.Router();
 router.get('/', authmiddleware, getEmployes);
 router.post('/ajout', authmiddleware, upload.single('image'), ajoutEmploye);
-// router.get('/:id', getEmploye);
 router.get('/:id', getEmployee);
 export default router;
