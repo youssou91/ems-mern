@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { FaEdge, FaEdit, FaEye, FaMoneyBillWave, FaMoneyBillWaveAlt } from "react-icons/fa";
+import {FaEdit, FaEye, FaMoneyBillWave, FaMoneyBillWaveAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 export const fetchDepartement = async () => {
     let departements
